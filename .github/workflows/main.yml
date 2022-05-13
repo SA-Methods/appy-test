@@ -7,17 +7,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: windows-latest
-
-    steps:
-      - uses: vednig/pyinstaller-action-windows@v0.1.5
-        with:
-            path: src
-            requirements: requirements.txt
-
+   
   deploy:
     runs-on: windows-latest
+    
+    strategy:
+      max-parallel: 1
     
     steps:
       - uses: actions/checkout@v3
