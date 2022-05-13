@@ -15,11 +15,15 @@ jobs:
       max-parallel: 1
     
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - uses: akhileshns/heroku-deploy@v3.12.12
+      - name: Deploy to Heroku
+        uses: onekiloparsec/heroku-node-deploy-subfolder@v1.1.0
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "appy-test"
-          heroku_email: ${{secrets.EMAIL}}
-          branch: "main"
+          api_key: ${{secrets.HEROKU_API_KEY}}
+          app_name: "appy-test"
+          email: ${{secrets.EMAIL}}
+          heroku_branch: "main"
+          subfolder: ""
+
