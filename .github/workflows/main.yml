@@ -1,0 +1,26 @@
+name: Heroku-Deployment
+
+on:
+  push:
+    branches: main
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: vednig/pyinstaller-action-windows@v0.1.5
+        with:
+            path: src
+            requirements: requirements.txt
+
+      - uses: actions/checkout@v3
+
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "appy-test"
+          heroku_email: ${{secrets.EMAIL}}
+          branch: "main"
